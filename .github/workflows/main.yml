@@ -21,7 +21,7 @@ jobs:
             echo "${{ secrets.SSH_SECRET_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
       - run: |
-            scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa prisma root@191.252.101.82:~/pedindoonline
+            scp -v -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa prisma root@191.252.101.82:~/pedindoonline
             scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa package.json root@191.252.101.82:~/pedindoonline
             scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa src root@191.252.101.82:~/pedindoonline
             scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa tsconfig.json root@191.252.101.82:~/pedindoonline
