@@ -28,4 +28,4 @@ jobs:
 
       - name: Rodando projeto
         run: ssh root@191.252.101.82 "source ~/.nvm/nvm.sh && nvm use 20.17.0"
-      - run: ssh root@191.252.101.82 "cd pedindoonline && yarn install && yarn build && npx prisma db pull && npx prisma generate && pm2 restart pedindoonline"
+      - run: ssh root@191.252.101.82 "cd pedindoonline && yarn && yarn build && npx prisma db pull && npx prisma generate && pm2 restart pedindoonline"
