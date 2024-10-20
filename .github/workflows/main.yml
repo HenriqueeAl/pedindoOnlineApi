@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - uses: actions/checkout@v3
+      - name: Acessando servidor e transferindo arquivos
+        run: |
+            mkdir -p ~/.ssh
+
+            echo "${{ secrets.SSH_SECRET_KEY }}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+      - run: |
+            scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa prisma forge@18.231.116.32:~/pedindoonline
+            scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa package.json forge@18.231.116.32:~/pedindoonline
+            scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa src forge@18.231.116.32:~/pedindoonline
+            scp -r -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa tsconfig.json forge@18.231.116.32:~/pedindoonline
+
+      - name: Rodando projeto
+        run: ssh forge@18.231.116.32 "source ~/.nvm/nvm.sh && nvm use 20.17.0"
+      - run: ssh forge@18.231.116.32 "cd pedindoonline && yarn install && yarn build && npx prisma db pull && npx prisma generate && pm2 restart pedindoonline"
