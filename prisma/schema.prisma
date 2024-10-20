@@ -8,10 +8,26 @@ datasource db {
 }
 
 model accounts {
-  id      Int    @id @default(autoincrement())
-  name    String
-  email   String
-  phone   BigInt
-  password    String
+  id                 Int      @id @default(autoincrement())
+  name               String
+  email              String
+  phone              BigInt
+  password           String
+  establishment_name String
+  created_at         DateTime @default(now())
+}
+
+model category {
+  id         Int      @id @default(autoincrement())
+  name       String
+  account    Int
+  created_at DateTime @default(now())
+}
+
+model product {
+  id         Int      @id @default(autoincrement())
+  name       String
+  price      Int
+  account    Int
   created_at DateTime @default(now())
 }

@@ -5,7 +5,7 @@ import { Router, Request, Response } from 'express';
 import { config } from 'dotenv';
 import { login, register } from './routes/auth/auth';
 import { verifyLogin } from './middlewares/auth';
-import { getAccountInfo } from './routes/account/account';
+import { getAccountInfo, updateAccount } from './routes/account/account';
 
 config();
 
@@ -46,7 +46,9 @@ route.post('/register',(req: Request, res: Response) => register(req, res));
 
 // Account
 route.get('/account', verifyLogin , (req: Request, res: Response) => getAccountInfo(req, res));
+route.put('/account', verifyLogin , (req: Request, res: Response) => updateAccount(req, res));
 
+// Categorys
 
 app.use(route)
 

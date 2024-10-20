@@ -16,5 +16,6 @@ export interface AccountInterface {
     email: string;
     phone: BigInt;
     password: string;
+    establishment_name: string;
     created_at: Date;
 }

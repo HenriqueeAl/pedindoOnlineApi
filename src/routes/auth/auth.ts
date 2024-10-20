@@ -85,6 +85,7 @@ export const register = async (req: Request, res: Response) => {
                 email: body.email,
                 phone: Number(body.phone),
                 password: passwordHash,
+                establishment_name: body.name
             }
         })
 
