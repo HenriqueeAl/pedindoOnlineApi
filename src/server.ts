@@ -50,4 +50,4 @@ route.get('/account', verifyLogin , (req: Request, res: Response) => getAccountI
 
 app.use(route)
 
-app.listen(6000, () => 'server running on port 6000')
+app.listen(8000, () => 'server running on port 8000')
