@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "typeRoots": [
+        "./node_modules/@types",
+        "./src/@types" // Caminho para suas declarações personalizadas
+      ],
+      "strict": true,
+      "esModuleInterop": true
+    },
+    "include": [
+      "src/**/*", // Inclua todos os arquivos na pasta src
+    ]
+  }
