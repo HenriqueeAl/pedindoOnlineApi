@@ -8,13 +8,14 @@ datasource db {
 }
 
 model accounts {
-  id                 Int      @id @default(autoincrement())
+  id                 Int        @id @default(autoincrement())
   name               String
   email              String
   phone              BigInt
   password           String
   establishment_name String
-  created_at         DateTime @default(now())
+  created_at         DateTime   @default(now())
+  category           category[]
 }
 
 model category {
@@ -22,6 +23,7 @@ model category {
   name       String
   account    Int
   created_at DateTime @default(now())
+  accounts   accounts @relation(fields: [account], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "category_accounts_fk")
 }
 
 model product {
