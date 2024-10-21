@@ -19,17 +19,20 @@ model accounts {
 }
 
 model category {
-  id         Int      @id @default(autoincrement())
-  name       String
-  account    Int
-  created_at DateTime @default(now())
-  accounts   accounts @relation(fields: [account], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "category_accounts_fk")
+  id                                 Int       @id @default(autoincrement())
+  name                               String
+  account                            Int
+  created_at                         DateTime  @default(now())
+  accounts                           accounts  @relation(fields: [account], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "category_accounts_fk")
+  product_product_categoryTocategory product[] @relation("product_categoryTocategory")
 }
 
 model product {
-  id         Int      @id @default(autoincrement())
-  name       String
-  price      Int
-  account    Int
-  created_at DateTime @default(now())
+  id                                  Int      @id @default(autoincrement())
+  name                                String
+  price                               Int
+  description                         String
+  category                            Int
+  created_at                          DateTime @default(now())
+  category_product_categoryTocategory category @relation("product_categoryTocategory", fields: [category], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_category_fk")
 }

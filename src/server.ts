@@ -6,7 +6,8 @@ import { config } from 'dotenv';
 import { login, register } from './routes/auth/auth';
 import { verifyLogin } from './middlewares/auth';
 import { getAccountInfo, updateAccount } from './routes/account/account';
-import { createCategory, getCategory } from './routes/category/category';
+import { createCategory, getCategory, getCategorySelect } from './routes/category/category';
+import { createProduct } from './routes/products/products';
 
 config();
 
@@ -52,6 +53,10 @@ route.put('/account', verifyLogin, (req: Request, res: Response) => updateAccoun
 // Categorys
 route.get('/category',verifyLogin, (req: Request, res: Response) => getCategory(req, res));
 route.post('/category',verifyLogin, (req: Request, res: Response) => createCategory(req, res));
+route.get('/category/select',verifyLogin, (req: Request, res: Response) => getCategorySelect(req, res));
+
+// Products
+route.post('/product',verifyLogin, (req: Request, res: Response) => createProduct(req, res));
 
 app.use(route)
 

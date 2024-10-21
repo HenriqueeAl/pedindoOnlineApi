@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../../server";
+import { ParsedQs } from 'qs';
 
 interface CreateCategoryInterface {
     name: string;
@@ -50,4 +51,20 @@ export const createCategory = async (req: Request, res: Response) => {
         console.error(error);
         res.status(500).send({ message: 'Erro ao atulizar informações da conta.' });
     }
+}
+
+export const getCategorySelect = async(req: Request, res: Response) => {
+    const { id } = req.query as ParsedQs;
+
+    const category = await prisma.category.findFirst({
+        where: {
+            id: Number(id) as number
+        }, 
+        include: {
+            product_product_categoryTocategory: true
+        }
+    })
+
+    res.status(200).send({status: true, message: 'Listagem de produtos!', products: category?.product_product_categoryTocategory});
+
 }
